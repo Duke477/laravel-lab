@@ -2,7 +2,9 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\StudentController;
+use App\Http\Controllers\PageController;
 use App\Models\Student;
+
 /*
 |--------------------------------------------------------------------------
 | ROUTES  — the front door of a Laravel app
@@ -22,16 +24,14 @@ Route::get('/', function () {
 
 // Lessons 2-6: you will add your routes below this line.
 
-use App\Http\Controllers\PageController;
-
 Route::get('/hello/{your_name}', function ($your_name) {
     return 'Hello, ' . htmlspecialchars($your_name, ENT_QUOTES, 'UTF-8');
 });
 
 Route::get('/about', [PageController::class, 'about']);
 Route::resource('students', StudentController::class);
-Route::get('/roll/{your_roll}', function (Student $student) {
-    return view('students.show', ['student' => $student]);
+Route::get('/roll/{your_roll}', function (Student $your_roll) {
+    return view('students.show', ['student' => $your_roll]);
 });
 Route::get('/api/students', function () {
     return response()->json(Student::all());
