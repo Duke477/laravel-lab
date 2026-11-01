@@ -21,12 +21,12 @@ class StudentController extends Controller
     public function store(Request $request)
     {
         $validated = $request->validate([
-            'roll_no' => 'required|string|max:255|unique:students,roll_no',
-            'name' => 'required|string|max:255',
-            'email' => 'required|email|max:255',
-            'department' => 'required|string|max:255',
-            'semester' => 'required|integer|min:1|max:8',
-            'cgpa' => 'required|numeric|min:0|max:10',
+            'roll_no' => ['required', 'string', 'max:255', 'unique:students,roll_no'],
+            'name' => ['required', 'string', 'max:255'],
+            'email' => ['required', 'email', 'max:255', 'unique:students,email'],
+            'department' => ['nullable', 'string', 'max:255'],
+            'semester' => ['nullable', 'integer', 'min:1', 'max:8'],
+            'cgpa' => ['nullable', 'numeric', 'min:0', 'max:10'],
         ]);
 
         Student::create($validated);
@@ -49,12 +49,12 @@ class StudentController extends Controller
     public function update(Request $request, Student $student)
     {
         $validated = $request->validate([
-            'roll_no' => 'required|string|max:255|unique:students,roll_no,' . $student->id,
-            'name' => 'required|string|max:255',
-            'email' => 'required|email|max:255',
-            'department' => 'required|string|max:255',
-            'semester' => 'required|integer|min:1|max:8',
-            'cgpa' => 'required|numeric|min:0|max:10',
+            'roll_no' => ['required', 'string', 'max:255', 'unique:students,roll_no,' . $student->id],
+            'name' => ['required', 'string', 'max:255'],
+            'email' => ['required', 'email', 'max:255', 'unique:students,email,' . $student->id],
+            'department' => ['nullable', 'string', 'max:255'],
+            'semester' => ['nullable', 'integer', 'min:1', 'max:8'],
+            'cgpa' => ['nullable', 'numeric', 'min:0', 'max:10'],
         ]);
 
         $student->update($validated);
