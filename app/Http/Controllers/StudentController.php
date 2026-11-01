@@ -32,7 +32,8 @@ class StudentController extends Controller
         Student::create($validated);
 
         return redirect()->route('students.index')
-            ->with('status', 'Student saved successfully!');
+            ->with('status', 'Student saved successfully!')
+            ->with('success', 'Student saved successfully!');
     }
 
     public function show(Student $student)
@@ -59,7 +60,7 @@ class StudentController extends Controller
         $student->update($validated);
 
         return redirect()->route('students.index')
-            ->with('status', 'Student updated successfully!');
+            ->with('success', 'Student updated successfully!');
     }
 
     public function destroy(Student $student)
@@ -67,6 +68,6 @@ class StudentController extends Controller
         $student->delete();
 
         return redirect()->route('students.index')
-            ->with('status', 'Student deleted successfully!');
+            ->with('success', 'Student deleted successfully!');
     }
 }
